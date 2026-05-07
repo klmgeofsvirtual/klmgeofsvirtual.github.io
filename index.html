@@ -11,7 +11,7 @@
     <!-- Leaflet Map CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <style>
@@ -439,7 +439,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
             background-color: var(--bg-base);
             color: #f8fafc;
             overflow-x: hidden;
@@ -524,22 +524,25 @@
         /* === GLASSMORPHISM === */
         .glass-panel {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.3) 100%);
-            backdrop-filter: blur(20px) saturate(130%);
-            -webkit-backdrop-filter: blur(20px) saturate(130%);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
             border: 1px solid var(--border-subtle);
             box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
             transition: all 0.5s var(--ease-out-expo);
         }
 
         .glass-panel:hover {
             border-color: var(--border-hover);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.35) 100%);
             box-shadow:
-                0 16px 48px rgba(0, 0, 0, 0.4),
+                0 16px 48px rgba(0, 0, 0, 0.5),
                 0 0 30px var(--klm-glow-soft),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transform: translateY(-4px);
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px) scale(1.01);
         }
 
         .glass-nav {
@@ -547,6 +550,7 @@
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-bottom: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
             transition: all 0.4s ease;
         }
 
@@ -735,6 +739,7 @@
             transition: all 0.4s var(--ease-out-expo);
             position: relative;
             overflow: hidden;
+            font-variant-numeric: tabular-nums;
         }
 
         .fids-row::before {
@@ -875,7 +880,7 @@
                     <button onclick="router('routes')"
                         class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium py-2">Network</button>
                     <button onclick="router('news')"
-                        class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium py-2">Intel</button>
+                        class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium py-2">News</button>
                     <button onclick="router('partners')"
                         class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium py-2">Partners</button>
 
@@ -924,7 +929,7 @@
                 <button onclick="router('routes'); toggleMobileMenu()"
                     class="block w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium text-slate-300">Network</button>
                 <button onclick="router('news'); toggleMobileMenu()"
-                    class="block w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium text-slate-300">Intel</button>
+                    class="block w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium text-slate-300">News</button>
                 <button onclick="router('partners'); toggleMobileMenu()"
                     class="block w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium text-slate-300">Partners</button>
                 <div class="border-t border-white/5 my-2"></div>
@@ -1107,6 +1112,23 @@
         };
 
         const newsData = [
+            { date: "06 MAY 2026", title: "Pilot Proficiency: Cockpit-Only Directive", tag: "OPS", content: "In an effort to improve overall community piloting skills and realism, KLM Owner Mileflight will be transitioning to flying exclusively in Cockpit View. We encourage all pilots to join this initiative to enhance their technical proficiency.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "06 MAY 2026", title: "GCRP Global Rankings: 3rd Place", tag: "LAUNCH", content: "KLM has officially secured 3rd Place in the global rankings for this month. This is a strong showing, and we are committed to \"locking in\" to climb even higher in the month of June.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "03 MAY 2026", title: "April 2026 Pilot Awards", tag: "STAFF", content: "We are proud to recognize the top performers of the past month for their incredible endurance and dedication.<br><br><strong>Pilots of the Month:</strong><br>🥇 AaAaAaAaAaAaAaA — 12 flights | 17.11 hours<br>🥈 Mileflight — 9 flights | 31.12 hours<br>🥉 JustFrost — 3 flights | 32.38 hours<br><br><strong>Honorary Mention:</strong><br>🎖️ Nihid — Recognized for completing the longest single haul of the month (13.50 hours).<br><br><span class='font-mono text-klm uppercase text-xs'>— Dutchjdjf (Admin)</span>" },
+            { date: "01 MAY 2026", title: "April 2026 Operations Report", tag: "OPS", content: "KLM is pleased to share our operational results for the month of April:<br><br>• Total Profits: $1,921,212<br>• Total Flight Time: 154.79 Hours<br>• Total Flights: 34<br>• Total Miles Covered: 75,779<br><br>• Longest Flight: KL3030 (EHAM > SAEZ) — 13.50 hours<br>• Shortest Flight: KL1007 (EHAM > EGLL) — 0.65 hours<br><br><span class='font-mono text-klm uppercase text-xs'>— KLM VA Management</span>" },
+            { date: "27 APR 2026", title: "Infrastructure Alert: Bot Service Restored", tag: "TECH", content: "Following a brief period of downtime, the community bot is back online. Maintenance was successfully completed to ensure logs are processed correctly. Pilots who were unable to log during the outage should contact @dutchjdjf with flight numbers for manual verification.<br><br><span class='font-mono text-klm uppercase text-xs'>— Dutchjdjf (Bot Host)</span>" },
+            { date: "25 APR 2026", title: "Aviator Ledger Integration", tag: "OPS", content: "KLM is now officially supporting Aviator Ledger, a realistic airline career simulator. Pilots are highly encouraged to use this platform to enhance their flight experience with real pay scales, fatigue rules, and a comprehensive career progression system while continuing to log for KLM.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "24 APR 2026", title: "Executive Hiatus: JustFrost", tag: "STAFF", content: "JustFrost (Co-Chairperson) will be taking a temporary hiatus from KLM and Air France operations to focus on academic commitments. We wish him a productive break and look forward to his return during the Summer Break.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, JustFrost (Co-Chairperson)</span>" },
+            { date: "17 APR 2026", title: "Delta Air Lines × KLM — Official Transatlantic Alliance", tag: "PARTNERSHIP", content: "\"Two Airlines. One Network. Crossing the Atlantic Together.\"<br><br>KLM and Delta Air Lines GeoFS have officially formed a transatlantic partnership. This collaboration introduces expanded routes, shared group flights, and joint operations between major hubs including Amsterdam (AMS), Atlanta (ATL), New York (JFK), Detroit (DTW), and Minneapolis (MSP).<br><br><span class='font-mono text-klm uppercase text-xs'>— KLM VA Management</span>" },
+            { date: "17 APR 2026", title: "Embraer Phenom 100 Acquisition", tag: "FLEET", content: "KLM has expanded its regional and private charter capabilities with the purchase of two new Embraer Phenom 100s for $4 million. These aircraft provide versatile options for short-haul and realistic regional routing.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "16 APR 2026", title: "Leadership Inquiry & Future Goals", tag: "STAFF", content: "Following the departure of Nihid, KLM Owner Mileflight has opened a dialogue with the community regarding the long-term leadership of the airline. While a search for a worthy successor may occur, our immediate goals remain: reaching 1000 flight hours and 100 human members by December.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "14 APR 2026", title: "Bot Infrastructure Optimization", tag: "TECH", content: "Following a scheduled maintenance window, the community bot has been moved to a new system. This upgrade is expected to increase uptime from 85% to approximately 97%, ensuring more reliable logging for all pilots.<br><br><span class='font-mono text-klm uppercase text-xs'>— Dutchjdjf (Bot Host)</span>" },
+            { date: "13 APR 2026", title: "Executive Retirement: Nihid Resigns as CEO", tag: "STAFF", content: "Nihid has officially announced his full retirement from CRP and his role as KLM CEO due to growing personal commitments. During his tenure, KLM reached unprecedented heights. Technical updates and bot management will now be handled by @dutchjdjf. We wish Nihid the very best in his future journeys.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Nihid (Former KLM CEO)</span>" },
+            { date: "13 APR 2026", title: "Milestone: 70 Members Reached", tag: "STAFF", content: "The KLM community continues its rapid expansion, officially surpassing 70 members today. We thank everyone for their continued interest in our operations.<br><br><span class='font-mono text-klm uppercase text-xs'>— KLM VA Management</span>" },
+            { date: "13 APR 2026", title: "Pilot License Revocation Notice", tag: "STAFF", content: "Effective immediately, the pilot permit for @Shraavan has been permanently revoked on behalf of the admin team, DGCA, ACIS, and GASA. This action follows multiple fatal incidents. We suggest a comprehensive review of flight skills before any future applications to other carriers.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Nihid (KLM CEO)</span>" },
+            { date: "08 APR 2026", title: "Condolence Statement from KLM", tag: "ALERT", content: "On behalf of KLM and our entire community, we extend our deepest condolences to the family and friends of Fanboylikespace. His passion and dedication to the aviation community through AirAsia and Air India were truly remarkable. He will be remembered as a monumental figure by all who flew alongside him.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
+            { date: "07 APR 2026", title: "Infrastructure Update: Website & Bot Migration", tag: "TECH", content: "The official KLM website has been successfully migrated to a new host at klmgeofsvirtual.github.io. Additionally, the community bot (now officially named Blue-y) is undergoing updates to improve stability and service uptime.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Nihid (KLM CEO)</span>" },
+            { date: "03 APR 2026", title: "Final Touchdown: A330-200 Retirement", tag: "FLEET", content: "The final Airbus A330-200 flight, KLM 330, has successfully completed its journey to Montreal. This marks the end of an era for the \"Butter Machine\" as we transition to a more modern long-haul fleet.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, JustFrost (Co-Chairperson)</span>" },
             { date: "02 APR 2026", title: "KLM Ranked #1 Airline in GCRP", tag: "LAUNCH", content: "We are proud to announce that KLM Virtual Airlines has been officially ranked as the #1 airline in the GeoFS Civilian RolePlay (GCRP) community, as audited by Delta13, an independent evaluator who runs the CRP Podcast. This achievement reflects the extraordinary dedication of our pilots, staff, and management team. Thank you to everyone who has been part of this journey.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Nihid (KLM CEO)</span>" },
             { date: "02 APR 2026", title: "Milestone: 50 Active Members", tag: "STAFF", content: "KLM Virtual Airlines has officially reached the milestone of 50 active members. This continued growth is a testament to the professionalism and commitment of our aviation community.<br><br><span class='font-mono text-klm uppercase text-xs'>— KLM VA Management</span>" },
             { date: "31 MAR 2026", title: "March 2026 Operations Report & Pilot Awards", tag: "OPS", content: "KLM has concluded an outstanding month of operations. Key statistics for March 2026:<br><br><strong>Operations Summary:</strong><br>• 49 active members • 314.45 total flight hours • 72 flights completed<br>• Busiest day: March 15 (11 flights) • Average 2.4 flights/day<br>• Average flight length: 3.5 hours • Total miles covered: 130,690<br><br><strong>Pilots of the Month:</strong><br>🥇 Your toaster — 22 flights, $1,962,550 profits<br>🥈 AaAaAaAaAaAaAaA — 12 flights, $1,195,800 profits<br>🥉 mileflight — 8 flights, $727,450 profits<br>🎖️ Honorary Mention: KLMpilot(GeoFS)-CMRO — 11 flights, $135,100 profits<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Nihid (KLM CEO)</span>" },
@@ -1166,7 +1188,7 @@
                         <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-none text-white drop-shadow-2xl animate-float">
                             Flying the World, <br><span class="text-gradient-klm glow-klm">Virtually.</span>
                         </h1>
-                        <p class="text-xl text-slate-300 mb-12 max-w-2xl font-light leading-relaxed">
+                        <p class="text-2xl text-slate-300 mb-12 max-w-2xl font-light leading-relaxed">
                             A highly disciplined, operations-first simulation community. We enforce strict procedures, realistic dispatching, and elite standards.
                         </p>
                         
@@ -1393,8 +1415,8 @@
                 <div class="relative py-24 animate-fade-in">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center mb-16 animate-slide-up">
-                            <h1 class="text-4xl font-black text-white mb-4">Fleet Allocation</h1>
-                            <p class="text-slate-400 max-w-2xl mx-auto font-light">Strategic deployment of modern, efficient aircraft designed for rigorous scheduling.</p>
+                            <h1 class="text-5xl font-black text-white mb-4 tracking-tight">Fleet Allocation</h1>
+                            <p class="text-lg text-slate-400 max-w-2xl mx-auto font-light">Strategic deployment of modern, efficient aircraft designed for rigorous scheduling.</p>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1670,14 +1692,14 @@
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col lg:flex-row gap-12 mb-12 animate-slide-up">
                             <div class="lg:w-1/3">
-                                <h1 class="text-4xl font-black text-white mb-4">Global Network</h1>
-                                <p class="text-slate-400 font-light leading-relaxed mb-8">
+                                <h1 class="text-5xl font-black text-white mb-4 tracking-tight">Global Network</h1>
+                                <p class="text-lg text-slate-400 font-light leading-relaxed mb-8">
                                     Our structured route network stems from the hub at <strong>Amsterdam Airport Schiphol (EHAM)</strong>. 
                                     Destinations are meticulously curated to ensure operational realism matching current fleet capabilities.
                                 </p>
-                                <div class="glass-panel p-6 rounded-2xl border-l-4 border-klm">
-                                    <div class="text-2xl font-black text-white mb-1">112</div>
-                                    <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">Active Destinations</div>
+                                <div class="glass-panel p-6 rounded-3xl border-l-4 border-klm">
+                                    <div class="text-4xl font-black text-white mb-1">112</div>
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Active Destinations</div>
                                 </div>
                             </div>
                             <div class="lg:w-2/3 relative h-[450px] bg-slate-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl glow-klm">
@@ -2376,14 +2398,14 @@
                 else { btn.classList.remove('bg-klm', 'text-white'); btn.classList.add('bg-white/5', 'text-slate-400'); }
             });
             grid.innerHTML = data.map(route => `
-                <div class="glass-panel p-5 rounded-2xl hover-lift border-l-2 border-l-transparent hover:border-l-klm transition-all">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="font-bold text-white text-sm truncate">${route.city}</span>
-                        <span class="font-mono text-xs text-klm bg-klm/10 px-2 rounded">${route.code}</span>
+                <div class="glass-panel p-6 rounded-3xl hover-lift border border-white/5 hover:border-klm/50 transition-all group">
+                    <div class="flex justify-between items-start mb-5">
+                        <span class="font-black text-white text-lg leading-tight tracking-tight">${route.city}</span>
+                        <span class="font-mono font-bold text-xs text-klm bg-klm/10 border border-klm/20 px-2.5 py-1 rounded-full shadow-sm">${route.code}</span>
                     </div>
-                    <div class="flex flex-col gap-1.5 text-[10px] font-mono text-slate-400">
-                         <div class="bg-white/5 px-2 py-1 rounded truncate"><span class="text-slate-500 mr-1">OUT</span> ${route.out}</div>
-                         <div class="bg-white/5 px-2 py-1 rounded truncate"><span class="text-slate-500 mr-1">IN</span> ${route.in}</div>
+                    <div class="flex flex-col gap-2 text-[10px] font-mono text-slate-400">
+                         <div class="bg-slate-900/50 border border-white/5 px-3 py-2 rounded-xl truncate group-hover:border-white/10 transition-colors"><span class="text-slate-500 font-bold tracking-widest mr-2">OUT</span> ${route.out}</div>
+                         <div class="bg-slate-900/50 border border-white/5 px-3 py-2 rounded-xl truncate group-hover:border-white/10 transition-colors"><span class="text-slate-500 font-bold tracking-widest mr-2">IN</span> ${route.in}</div>
                     </div>
                 </div>
             `).join('');
