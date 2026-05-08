@@ -1005,7 +1005,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, limit, serverTimestamp, doc, updateDoc, increment, setDoc, getDoc, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // ==========================================
         //  FIREBASE CONFIGURATION
@@ -1224,21 +1224,96 @@
             `,
 
             adminPortal: `
-                <div class="py-24 animate-fade-in">
+                <div class="py-16 animate-fade-in">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex items-center gap-4 mb-12 animate-slide-up">
-                            <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center">
-                                <i data-lucide="terminal" class="w-6 h-6 text-amber-500"></i>
+
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-10 animate-slide-up">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="terminal" class="w-6 h-6 text-amber-500"></i>
+                                </div>
+                                <div>
+                                    <h1 class="text-3xl font-black text-white">Central Command</h1>
+                                    <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest">Admin Control Override</p>
+                                </div>
                             </div>
-                            <div>
-                                <h1 class="text-3xl font-black text-white">Central Command</h1>
-                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest">Admin Control Override</p>
-                            </div>
+                            <button onclick="window.doAdminLogout()" class="flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-red-500/20 transition-all">
+                                <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Sign Out
+                            </button>
                         </div>
-                        <div class="glass-panel p-8 rounded-3xl border border-white/10 text-center animate-slide-up delay-100">
-                            <i data-lucide="construction" class="w-12 h-12 text-slate-500 mx-auto mb-4"></i>
-                            <h2 class="text-xl font-bold text-white mb-2">Portal Under Construction</h2>
-                            <p class="text-slate-400 text-sm">Administrative modules are currently offline.</p>
+
+                        <!-- Grid: Chat + Settings -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                            <!-- ADMIN CHAT (2/3) -->
+                            <div class="lg:col-span-2 glass-panel rounded-3xl border border-white/10 flex flex-col overflow-hidden animate-slide-up" style="height:600px">
+                                <div class="px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                                    <i data-lucide="message-circle" class="w-5 h-5 text-amber-500"></i>
+                                    <h2 class="font-bold text-white text-sm uppercase tracking-widest">Admin Chat</h2>
+                                    <span id="chat-name-badge" class="ml-auto text-[10px] font-mono text-slate-500"></span>
+                                </div>
+
+                                <!-- Messages -->
+                                <div id="admin-chat-messages" class="flex-1 overflow-y-auto p-5 space-y-3 text-sm font-light">
+                                    <div class="text-center text-slate-600 text-xs pt-8">Loading messages...</div>
+                                </div>
+
+                                <!-- Set Name Prompt -->
+                                <div id="chat-name-prompt" class="hidden border-t border-white/10 p-4">
+                                    <p class="text-xs text-slate-400 mb-3">Set a display name to begin chatting.</p>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="chat-name-input" maxlength="20" placeholder="Your display name" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 font-mono">
+                                        <button onclick="window.setAdminDisplayName()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest transition-all">Save</button>
+                                    </div>
+                                </div>
+
+                                <!-- Message Input -->
+                                <form id="chat-input-area" onsubmit="window.sendAdminMessage(event)" class="hidden border-t border-white/10 p-4 flex gap-2">
+                                    <input type="text" id="chat-msg-input" maxlength="300" placeholder="Send a message..." autocomplete="off" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                    <button type="submit" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- SETTINGS (1/3) -->
+                            <div class="flex flex-col gap-6 animate-slide-up delay-100">
+
+                                <!-- Change Password -->
+                                <div class="glass-panel rounded-3xl border border-white/10 p-6">
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <i data-lucide="key" class="w-5 h-5 text-amber-500"></i>
+                                        <h2 class="font-bold text-white text-sm uppercase tracking-widest">Change Password</h2>
+                                    </div>
+                                    <form onsubmit="window.handlePasswordChange(event)" class="space-y-4">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">New Password</label>
+                                            <input type="password" id="new-password" required minlength="6" class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono" placeholder="••••••••">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Confirm Password</label>
+                                            <input type="password" id="confirm-password" required minlength="6" class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono" placeholder="••••••••">
+                                        </div>
+                                        <div id="pw-status" class="hidden text-xs p-3 rounded-lg text-center font-mono"></div>
+                                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-900 font-black uppercase tracking-widest py-2.5 rounded-xl transition-all text-xs flex justify-center items-center gap-2">
+                                            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Update Password
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!-- Session Info -->
+                                <div class="glass-panel rounded-3xl border border-white/10 p-6">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i data-lucide="user-check" class="w-5 h-5 text-amber-500"></i>
+                                        <h2 class="font-bold text-white text-sm uppercase tracking-widest">Session</h2>
+                                    </div>
+                                    <div id="portal-session-info" class="text-xs font-mono text-slate-400 space-y-2">
+                                        <div>Loading...</div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2099,10 +2174,12 @@
 
         // --- ROUTER LOGIC ---
         let dispatchUnsubscribe = null;
+        let adminChatUnsubscribe = null;
 
         function router(pageName) {
             if (dispatchUnsubscribe) { dispatchUnsubscribe(); dispatchUnsubscribe = null; }
             if (condolenceUnsubscribe) { condolenceUnsubscribe(); condolenceUnsubscribe = null; }
+            if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
 
             const contentDiv = document.getElementById('app-content');
             contentDiv.innerHTML = pages[pageName] || pages['home'];
@@ -2112,6 +2189,7 @@
             if (pageName === 'home') { setTimeout(initDispatchBoard, 500); }
             if (pageName === 'profile') { setTimeout(initProfile, 100); }
             if (pageName === 'condolences') { setTimeout(initCondolences, 100); }
+            if (pageName === 'adminPortal') { setTimeout(initAdminPortal, 100); }
 
             lucide.createIcons();
             window.scrollTo(0, 0);
@@ -2545,6 +2623,138 @@
                 errEl.classList.remove('hidden');
                 btn.innerHTML = orig; btn.disabled = false;
             }
+        };
+
+        // --- ADMIN PORTAL INIT ---
+        function initAdminPortal() {
+            const user = auth?.currentUser;
+            const sessionEl = document.getElementById('portal-session-info');
+            if (sessionEl && user) {
+                sessionEl.innerHTML = `
+                    <div class="flex justify-between"><span class="text-slate-500">Email</span><span class="text-amber-400 truncate max-w-[120px]">${user.email}</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">UID</span><span class="text-slate-300">${user.uid.substring(0, 10)}...</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Last Sign-In</span><span class="text-slate-300">${new Date(user.metadata.lastSignInTime).toLocaleDateString()}</span></div>
+                `;
+            }
+            initAdminChat();
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function initAdminChat() {
+            const adminName = localStorage.getItem('klm_admin_name');
+            const badgeEl = document.getElementById('chat-name-badge');
+            if (adminName) {
+                if (badgeEl) badgeEl.textContent = '— ' + adminName;
+                document.getElementById('chat-name-prompt')?.classList.add('hidden');
+                document.getElementById('chat-input-area')?.classList.remove('hidden');
+            } else {
+                document.getElementById('chat-name-prompt')?.classList.remove('hidden');
+                document.getElementById('chat-input-area')?.classList.add('hidden');
+            }
+
+            if (!db) return;
+            const chatQ = query(collection(db, 'admin_chat'), orderBy('timestamp', 'asc'));
+            adminChatUnsubscribe = onSnapshot(chatQ, (snap) => {
+                const container = document.getElementById('admin-chat-messages');
+                if (!container) { adminChatUnsubscribe(); adminChatUnsubscribe = null; return; }
+                if (snap.empty) {
+                    container.innerHTML = '<div class="text-center text-slate-600 text-xs pt-8">No messages yet. Say something!</div>';
+                    return;
+                }
+                container.innerHTML = '';
+                snap.forEach(docSnap => {
+                    const d = docSnap.data();
+                    const timeStr = d.timestamp?.toDate ? d.timestamp.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+                    const div = document.createElement('div');
+                    div.className = 'flex flex-col gap-0.5';
+                    div.innerHTML = `
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-amber-400 font-bold text-xs">${d.sender || 'Admin'}</span>
+                            <span class="text-slate-600 text-[10px] font-mono">${timeStr}</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed pl-0.5">${d.text}</p>
+                    `;
+                    container.appendChild(div);
+                });
+                container.scrollTop = container.scrollHeight;
+            });
+        }
+
+        window.setAdminDisplayName = () => {
+            const input = document.getElementById('chat-name-input');
+            const name = input?.value.trim();
+            if (!name) return;
+            localStorage.setItem('klm_admin_name', name);
+            const badge = document.getElementById('chat-name-badge');
+            if (badge) badge.textContent = '— ' + name;
+            document.getElementById('chat-name-prompt')?.classList.add('hidden');
+            document.getElementById('chat-input-area')?.classList.remove('hidden');
+        };
+
+        window.sendAdminMessage = async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('chat-msg-input');
+            const text = input?.value.trim();
+            const sender = localStorage.getItem('klm_admin_name') || 'Admin';
+            if (!text || !db) return;
+            input.value = '';
+            try {
+                await addDoc(collection(db, 'admin_chat'), { sender, text, timestamp: serverTimestamp() });
+            } catch (err) { console.error('Chat send error:', err); }
+        };
+
+        // --- PASSWORD CHANGE HANDLER ---
+        window.handlePasswordChange = async (e) => {
+            e.preventDefault();
+            const newPw = document.getElementById('new-password').value;
+            const confirmPw = document.getElementById('confirm-password').value;
+            const statusEl = document.getElementById('pw-status');
+            const btn = e.target.querySelector('button[type="submit"]');
+
+            statusEl.className = 'text-xs p-3 rounded-lg text-center font-mono';
+            statusEl.classList.remove('hidden');
+
+            if (newPw !== confirmPw) {
+                statusEl.classList.add('bg-red-500/10', 'border', 'border-red-500/20', 'text-red-400');
+                statusEl.textContent = 'Passwords do not match.';
+                return;
+            }
+
+            const user = auth?.currentUser;
+            if (!user) {
+                statusEl.classList.add('bg-red-500/10', 'border', 'border-red-500/20', 'text-red-400');
+                statusEl.textContent = 'No authenticated session found.';
+                return;
+            }
+
+            btn.disabled = true;
+            const origText = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin inline mr-1"></i> Updating...';
+            if (window.lucide) lucide.createIcons();
+
+            try {
+                await updatePassword(user, newPw);
+                statusEl.classList.add('bg-emerald-500/10', 'border', 'border-emerald-500/20', 'text-emerald-400');
+                statusEl.textContent = 'Password updated successfully.';
+                e.target.reset();
+            } catch (err) {
+                console.error('Password update error:', err);
+                statusEl.classList.add('bg-red-500/10', 'border', 'border-red-500/20', 'text-red-400');
+                statusEl.textContent = err.code === 'auth/requires-recent-login'
+                    ? 'Session expired. Please log out and log in again.'
+                    : 'Update failed: ' + err.message;
+            } finally {
+                btn.innerHTML = origText;
+                btn.disabled = false;
+                if (window.lucide) lucide.createIcons();
+            }
+        };
+
+        // --- ADMIN LOGOUT ---
+        window.doAdminLogout = () => {
+            if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
+            auth?.signOut().catch(console.error);
+            router('home');
         };
 
         router('home');
