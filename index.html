@@ -986,10 +986,13 @@
             </div>
             <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-mono">
                 <div>&copy; 2026 KLM Virtual Airline Operations.</div>
-                <div class="flex gap-4 mt-4 md:mt-0">
+                <div class="flex gap-4 mt-4 md:mt-0 items-center">
                     <a href="https://discord.gg/vRzmhuEmBQ" target="_blank"
                         class="hover:text-white transition-colors flex items-center gap-1"><i
                             data-lucide="message-square" class="w-4 h-4"></i> COMMS</a>
+                    <button onclick="router('adminLogin')" class="hover:text-amber-500 transition-colors flex items-center gap-1 opacity-30 hover:opacity-100" title="Staff Access">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2512,19 +2515,6 @@
 
         document.getElementById('nav-logo').src = siteImages.logo;
         document.getElementById('footer-logo').src = siteImages.logo;
-
-        // --- SECRET ADMIN TRIGGER ---
-        let _ac = 0, _at = null;
-        document.getElementById('footer-logo').addEventListener('click', () => {
-            _ac++;
-            if (!_at) {
-                _at = setTimeout(() => { _ac = 0; _at = null; }, 3000);
-            }
-            if (_ac >= 5) {
-                _ac = 0; clearTimeout(_at); _at = null;
-                router('adminLogin');
-            }
-        });
 
         // --- ADMIN AUTH HANDLER ---
         window.handleAdminAuth = async (e) => {
