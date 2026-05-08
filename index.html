@@ -1002,6 +1002,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, limit, serverTimestamp, doc, updateDoc, increment, setDoc, getDoc, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // ==========================================
         //  FIREBASE CONFIGURATION
@@ -1018,9 +1019,11 @@
         const REQUIRED_GUILD_ID = "1432591913915125824";
 
         let db;
+        let auth;
         try {
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
+            auth = getAuth(app);
             console.log("Firebase initialized");
         } catch (e) { console.error("Firebase Error:", e); }
 
@@ -1093,12 +1096,13 @@
             { type: "Boeing 737-800", icao: "B738", role: "Short Haul", desc: "Backbone of European operations. Gradual retirement scheduled.", status: "Phasing Out", count: 30, img: "https://upload.wikimedia.org/wikipedia/commons/1/18/KLM_Boeing_737-800_PH-BCD_%2826038861623%29.jpg" },
             { type: "Airbus A320neo", icao: "A20N", role: "Short Haul", desc: "Next-gen European core. Maximum efficiency and realism.", status: "Active", count: 9, img: "https://image.parool.nl/211007987/width/2480/impressie-van-een-airbus-a320-neo-in-de-kleuren-van-klm" },
             { type: "Airbus A321neo", icao: "A21N", role: "Short Haul", desc: "High-capacity European routes. Primary replacement for B737.", status: "Active", count: 21, img: "https://img.static-kl.com/transform/8806738a-a661-4934-a177-95adef39307d/" },
-            { type: "Airbus A350-900", icao: "A359", role: "Long Haul", desc: "Next-generation widebody. Ultra-efficient long-haul flagship with cutting-edge technology.", status: "Active", count: 25, img: "https://content.presspage.com/uploads/162/61e20533-7507-4ca2-98af-dc3959d4f981/1920_a350.jpg?10000" },
+            { type: "Airbus A350-900", icao: "A359", role: "Long Haul", desc: "Next-generation widebody. Ultra-efficient long-haul flagship with cutting-edge technology.", status: "Active", count: 28, img: "https://content.presspage.com/uploads/162/61e20533-7507-4ca2-98af-dc3959d4f981/1920_a350.jpg?10000" },
             { type: "Boeing 777-300ER LTRP", icao: "B77W", role: "Long Haul", desc: "Reinforced and refurbished for reliable service.", status: "LTRP", count: 8, img: "https://www.aerotime.aero/images/klm_boeing_777-300er_orange_pride_livery.jpg" },
             { type: "Boeing 787-9", icao: "B789", role: "Long Haul", desc: "The future of our long-haul operations. Elite flagship.", status: "Active", count: 13, img: "https://content.presspage.com/uploads/162/1920_25508202-10155250600310773-6357422191407278812-n.jpg" },
             { type: "Boeing 787-10", icao: "B78X", role: "Long Haul", desc: "High-capacity Dreamliner for premium long-haul routes.", status: "Active", count: 14, img: "https://content.presspage.com/uploads/162/1920_paulridderhof30jun196473-465547.jpg?10000" },
             { type: "Pilatus PC-24", icao: "PC24", role: "Executive", desc: "Private executive jet. Acquired from Lufthansa Airways for corporate and VIP operations.", status: "Active", count: 1, img: "https://www.luchtvaartnieuws.nl/sites/default/files/styles/artikel/public/website_633x300/sider-businessav/pilatus_pc24_c_pilatus_1280.jpg?itok=LABPzKcb" },
             { type: "Embraer Phenom 100", icao: "E50P", role: "Executive", desc: "Entry-level jet with premium comfort. Ideal for short-range executive travel.", status: "Active", count: 2, img: "https://jetservicenl.com/files/aircraft/phenom-100.1.jpg" },
+            { type: "De Havilland Dash 8 Q400", icao: "DH8D", role: "Cityhopper", desc: "Short-haul regional turboprop. Requires GeoFS Extra Vehicles addon.", status: "Active", count: 12, img: "https://cdn.aerocontact.com/public/img/aviaexpo/produits/images/573/detail_q400_900x636.jpg", addon: "https://github.com/af267/GeoFS-Extra-Vehicles" },
         ];
 
         const routeData = {
@@ -1108,10 +1112,12 @@
             "Africa": [{ city: "Nairobi", code: "HKJK", out: "KL4006, KL4007, KL4008, KL4009, KL4010", in: "KL4001, KL4002, KL4003, KL4004, KL4005" }, { city: "Dar es Salaam", code: "HTDA", out: "KL4016, KL4017, KL4018, KL4019, KL4020", in: "KL4011, KL4012, KL4013, KL4014, KL4015" }, { city: "Johannesburg", code: "FAOR", out: "KL4026, KL4027, KL4028, KL4029, KL4030", in: "KL4021, KL4022, KL4023, KL4024, KL4025" }, { city: "Cape Town", code: "FACT", out: "KL4036, KL4037, KL4038, KL4039, KL4040", in: "KL4031, KL4032, KL4033, KL4034, KL4035" }, { city: "Accra", code: "DGAA", out: "KL4046, KL4047, KL4048, KL4049, KL4050", in: "KL4041, KL4042, KL4043, KL4044, KL4045" }, { city: "Lagos", code: "DNMM", out: "KL4056, KL4057, KL4058, KL4059, KL4060", in: "KL4051, KL4052, KL4053, KL4054, KL4055" }, { city: "Kigali", code: "HRYR", out: "KL4066, KL4067, KL4068, KL4069, KL4070", in: "KL4061, KL4062, KL4063, KL4064, KL4065" }, { city: "Entebbe", code: "HUEN", out: "KL4076, KL4077, KL4078, KL4079, KL4080", in: "KL4071, KL4072, KL4073, KL4074, KL4075" }],
             "Asia": [{ city: "Delhi", code: "VIDP", out: "KL5006, KL5007, KL5008, KL5009, KL5010", in: "KL5001, KL5002, KL5003, KL5004, KL5005" }, { city: "Mumbai", code: "VABB", out: "KL5016, KL5017, KL5018, KL5019, KL5020", in: "KL5011, KL5012, KL5013, KL5014, KL5015" }, { city: "Bangalore", code: "VOBL", out: "KL5026, KL5027, KL5028, KL5029, KL5030", in: "KL5021, KL5022, KL5023, KL5024, KL5025" }, { city: "Beijing", code: "ZBAA", out: "KL5036, KL5037, KL5038, KL5039, KL5040", in: "KL5031, KL5032, KL5033, KL5034, KL5035" }, { city: "Shanghai", code: "ZSPD", out: "KL5046, KL5047, KL5048, KL5049, KL5050", in: "KL5041, KL5042, KL5043, KL5044, KL5045" }, { city: "Hong Kong", code: "VHHH", out: "KL5056, KL5057, KL5058, KL5059, KL5060", in: "KL5051, KL5052, KL5053, KL5054, KL5055" }, { city: "Tokyo Narita", code: "RJAA", out: "KL5066, KL5067, KL5068, KL5069, KL5070", in: "KL5061, KL5062, KL5063, KL5064, KL5065" }, { city: "Osaka Kansai", code: "RJBB", out: "KL5076, KL5077, KL5078, KL5079, KL5080", in: "KL5071, KL5072, KL5073, KL5074, KL5075" }, { city: "Seoul Incheon", code: "RKSI", out: "KL5086, KL5087, KL5088, KL5089, KL5090", in: "KL5081, KL5082, KL5083, KL5084, KL5085" }, { city: "Bangkok", code: "VTBS", out: "KL5096, KL5097, KL5098, KL5099, KL5100", in: "KL5091, KL5092, KL5093, KL5094, KL5095" }, { city: "Singapore", code: "WSSS", out: "KL5106, KL5107, KL5108, KL5109, KL5110", in: "KL5101, KL5102, KL5103, KL5104, KL5105" }, { city: "Kuala Lumpur", code: "WMKK", out: "KL5116, KL5117, KL5118, KL5119, KL5120", in: "KL5111, KL5112, KL5113, KL5114, KL5115" }, { city: "Jakarta", code: "WIII", out: "KL5126, KL5127, KL5128, KL5129, KL5130", in: "KL5121, KL5122, KL5123, KL5124, KL5125" }, { city: "Manila", code: "RPLL", out: "KL5136, KL5137, KL5138, KL5139, KL5140", in: "KL5131, KL5132, KL5133, KL5134, KL5135" }, { city: "Taipei", code: "RCTP", out: "KL5146, KL5147, KL5148, KL5149, KL5150", in: "KL5141, KL5142, KL5143, KL5144, KL5145" }, { city: "Denpasar Bali", code: "WADD", out: "KL5156, KL5157, KL5158, KL5159, KL5160", in: "KL5151, KL5152, KL5153, KL5154, KL5155" }],
             "Middle East": [{ city: "Dubai", code: "OMDB", out: "KL6006, KL6007, KL6008, KL6009, KL6010", in: "KL6001, KL6002, KL6003, KL6004, KL6005" }, { city: "Abu Dhabi", code: "OMAA", out: "KL6016, KL6017, KL6018, KL6019, KL6020", in: "KL6011, KL6012, KL6013, KL6014, KL6015" }, { city: "Kuwait City", code: "OKBK", out: "KL6026, KL6027, KL6028, KL6029, KL6030", in: "KL6021, KL6022, KL6023, KL6024, KL6025" }, { city: "Doha", code: "OTHH", out: "KL439, KL6036, KL6037, KL6038, KL6039, KL6040", in: "KL440, KL6031, KL6032, KL6033, KL6034, KL6035" }, { city: "Tel Aviv", code: "LLBG", out: "KL6046, KL6047, KL6048, KL6049, KL6050", in: "KL6041, KL6042, KL6043, KL6044, KL6045" }, { city: "Riyadh", code: "OERK", out: "KL6056, KL6057, KL6058, KL6059, KL6060", in: "KL6051, KL6052, KL6053, KL6054, KL6055" }, { city: "Cairo", code: "HECA", out: "KL6066, KL6067, KL6068, KL6069, KL6070", in: "KL6061, KL6062, KL6063, KL6064, KL6065" }],
-            "Codeshare": [{ city: "Taipei (EVA Air)", code: "RCTP", out: "KL8001, KL8002", in: "KL8003, KL8004" }, { city: "Singapore (SIA)", code: "WSSS", out: "KL8005, KL8006", in: "KL8007, KL8008" }, { city: "Kuala Lumpur (SIA)", code: "WMKK", out: "KL8009, KL8010", in: "KL8011, KL8012" }, { city: "London Gatwick (Kalitus)", code: "EGKK", out: "KL7090", in: "KL7091" }, { city: "Paris Orly (Kalitus)", code: "LFPO", out: "KL7092, KL7094, KL7096", in: "KL7093, KL7095, KL7097" }, { city: "Frankfurt (Kalitus)", code: "EDDF", out: "KL7095", in: "KL7094" }, { city: "Munich (Kalitus)", code: "EDDM", out: "KL7097", in: "KL7096" }]
+            "Codeshare": [{ city: "Taipei (EVA Air)", code: "RCTP", out: "KL8001, KL8002", in: "KL8003, KL8004" }, { city: "Singapore (SIA)", code: "WSSS", out: "KL8005, KL8006", in: "KL8007, KL8008" }, { city: "Kuala Lumpur (SIA)", code: "WMKK", out: "KL8009, KL8010", in: "KL8011, KL8012" }, { city: "Kuala Lumpur (Malaysia Airlines)", code: "WMKK", out: "KL8710", in: "KL8711" }, { city: "London Gatwick (Kalitus)", code: "EGKK", out: "KL7090", in: "KL7091" }, { city: "Paris Orly (Kalitus)", code: "LFPO", out: "KL7092, KL7094, KL7096", in: "KL7093, KL7095, KL7097" }, { city: "Frankfurt (Kalitus)", code: "EDDF", out: "KL7095", in: "KL7094" }, { city: "Munich (Kalitus)", code: "EDDM", out: "KL7097", in: "KL7096" }]
         };
 
         const newsData = [
+            { date: "08 MAY 2026", title: "Fleet Expansion", tag: "FLEET", content: "KLM is pleased to announce the acquisition of twelve (12) new De Havilland Canada Dash 8 aircraft from ANA.<br><br>These aircraft will strengthen our regional operations and allow us to expand connectivity across Europe with improved frequency and efficiency on short-haul routes.<br><br>The Dash 8 fleet will begin entering service shortly following delivery and operational preparation.<br><br><span class='font-mono text-klm uppercase text-xs'>@Announcements Ping</span>" },
+            { date: "08 MAY 2026", title: "KLM × Malaysia Airlines Codeshare Partnership", tag: "PARTNERSHIP", content: "KLM is pleased to announce a new codeshare partnership with Malaysia Airlines on services between Amsterdam and Kuala Lumpur.<br><br><strong>Routes</strong><br>EHAM → WMKK<br>KLM Flight: KL8710<br>Operated by Malaysia Airlines<br><br>WMKK → EHAM<br>KLM Flight: KL8711<br>Operated by Malaysia Airlines<br><br>This partnership expands connectivity between Europe and Southeast Asia while giving our passengers more seamless travel options through Kuala Lumpur International Airport.<br><br>Further destination connectivity through Malaysia Airlines’ network will also be available via Kuala Lumpur.<br><br><span class='font-mono text-klm uppercase text-xs'>@Announcements Ping</span>" },
             { date: "06 MAY 2026", title: "Pilot Proficiency: Cockpit-Only Directive", tag: "OPS", content: "In an effort to improve overall community piloting skills and realism, KLM Owner Mileflight will be transitioning to flying exclusively in Cockpit View. We encourage all pilots to join this initiative to enhance their technical proficiency.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
             { date: "06 MAY 2026", title: "GCRP Global Rankings: 3rd Place", tag: "LAUNCH", content: "KLM has officially secured 3rd Place in the global rankings for this month. This is a strong showing, and we are committed to \"locking in\" to climb even higher in the month of June.<br><br><span class='font-mono text-klm uppercase text-xs'>Signed, Mileflight (KLM Owner)</span>" },
             { date: "03 MAY 2026", title: "April 2026 Pilot Awards", tag: "STAFF", content: "We are proud to recognize the top performers of the past month for their incredible endurance and dedication.<br><br><strong>Pilots of the Month:</strong><br>🥇 AaAaAaAaAaAaAaA — 12 flights | 17.11 hours<br>🥈 Mileflight — 9 flights | 31.12 hours<br>🥉 JustFrost — 3 flights | 32.38 hours<br><br><strong>Honorary Mention:</strong><br>🎖️ Nihid — Recognized for completing the longest single haul of the month (13.50 hours).<br><br><span class='font-mono text-klm uppercase text-xs'>— Dutchjdjf (Admin)</span>" },
@@ -1177,6 +1183,64 @@
         }
 
         const pages = {
+            adminLogin: `
+                <div class="py-24 animate-fade-in min-h-[80vh] flex flex-col justify-center items-center">
+                    <div class="max-w-md w-full px-4">
+                        <div class="glass-panel p-8 rounded-3xl border-t-4 border-amber-500 animate-slide-up shadow-2xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -mr-8 -mt-8 pointer-events-none"></div>
+                            <div class="text-center mb-8 relative z-10">
+                                <div class="w-16 h-16 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/20">
+                                    <i data-lucide="shield-alert" class="w-8 h-8 text-amber-500"></i>
+                                </div>
+                                <h1 class="text-3xl font-black text-white tracking-tight">Restricted Access</h1>
+                                <p class="text-xs text-amber-500 font-bold uppercase tracking-widest mt-2">Authorized Personnel Only</p>
+                            </div>
+                            <form id="admin-login-form" onsubmit="window.handleAdminAuth(event)" class="space-y-5 relative z-10">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Admin Identity</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i data-lucide="user" class="w-4 h-4 text-slate-500"></i></div>
+                                        <input type="text" id="admin-username" required autocomplete="off" class="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Passcode</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i data-lucide="lock" class="w-4 h-4 text-slate-500"></i></div>
+                                        <input type="password" id="admin-password" required autocomplete="off" class="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all font-mono" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div id="admin-error" class="hidden bg-red-500/10 border border-red-500/20 text-red-400 text-xs p-3 rounded-lg text-center font-mono">Authentication failed. Invalid credentials.</div>
+                                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-900 font-black uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] mt-2 flex justify-center items-center">
+                                    <i data-lucide="log-in" class="w-4 h-4 mr-2"></i> Verify Access
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            adminPortal: `
+                <div class="py-24 animate-fade-in">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex items-center gap-4 mb-12 animate-slide-up">
+                            <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="terminal" class="w-6 h-6 text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-black text-white">Central Command</h1>
+                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-widest">Admin Control Override</p>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-8 rounded-3xl border border-white/10 text-center animate-slide-up delay-100">
+                            <i data-lucide="construction" class="w-12 h-12 text-slate-500 mx-auto mb-4"></i>
+                            <h2 class="text-xl font-bold text-white mb-2">Portal Under Construction</h2>
+                            <p class="text-slate-400 text-sm">Administrative modules are currently offline.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+
             home: `
                 <div class="relative min-h-[90vh] flex flex-col pt-10">
                     <div class="absolute inset-0 z-0">
@@ -2448,6 +2512,51 @@
 
         document.getElementById('nav-logo').src = siteImages.logo;
         document.getElementById('footer-logo').src = siteImages.logo;
+
+        // --- SECRET ADMIN TRIGGER ---
+        let _ac = 0, _at = null;
+        document.getElementById('footer-logo').addEventListener('click', () => {
+            _ac++;
+            if (!_at) {
+                _at = setTimeout(() => { _ac = 0; _at = null; }, 3000);
+            }
+            if (_ac >= 5) {
+                _ac = 0; clearTimeout(_at); _at = null;
+                router('adminLogin');
+            }
+        });
+
+        // --- ADMIN AUTH HANDLER ---
+        window.handleAdminAuth = async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 mr-2 animate-spin inline"></i> AUTHENTICATING...';
+            btn.disabled = true;
+            lucide.createIcons();
+
+            const username = document.getElementById('admin-username').value.trim();
+            const password = document.getElementById('admin-password').value;
+            const errEl = document.getElementById('admin-error');
+            errEl.classList.add('hidden');
+
+            if (!auth) {
+                errEl.textContent = 'Auth service unavailable.';
+                errEl.classList.remove('hidden');
+                btn.innerHTML = orig; btn.disabled = false; return;
+            }
+
+            try {
+                await signInWithEmailAndPassword(auth, username + '@admin.klm.va', password);
+                router('adminPortal');
+            } catch (err) {
+                console.error('Admin auth error:', err);
+                errEl.textContent = 'Authentication failed. Invalid credentials.';
+                errEl.classList.remove('hidden');
+                btn.innerHTML = orig; btn.disabled = false;
+            }
+        };
+
         router('home');
     </script>
 </body>
