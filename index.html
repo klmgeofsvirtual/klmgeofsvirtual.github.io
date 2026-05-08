@@ -3256,7 +3256,8 @@
 
         window.publishNews = async (e) => {
             e.preventDefault();
-            if (!auth?.currentUser || !db) return;
+            if (!db) { alert('Database not initialized.'); return; }
+            if (!auth?.currentUser) { alert('You must be logged in as an administrator to publish news.'); return; }
             const id = document.getElementById('news-id').value;
             const title = document.getElementById('news-title').value;
             const tag = document.getElementById('news-tag').value;
@@ -3353,8 +3354,11 @@
         };
 
         window.deleteAdminNews = async (id) => {
+            if (!db) { alert('Database not initialized.'); return; }
+            if (!auth?.currentUser) { alert('You must be logged in as an administrator to delete articles.'); return; }
             if (!confirm('Are you sure you want to delete this article?')) return;
-            if (!auth?.currentUser || !db) return;
+            
+            console.log('Deleting news article:', id);
 
             try {
                 await deleteDoc(doc(db, 'news', id));
@@ -3369,7 +3373,8 @@
         // --- FLEET CMS ---
         window.saveAircraft = async (e) => {
             e.preventDefault();
-            if (!auth?.currentUser || !db) return;
+            if (!db) { alert('Database not initialized.'); return; }
+            if (!auth?.currentUser) { alert('You must be logged in as an administrator to save aircraft.'); return; }
             
             const id = document.getElementById('fleet-id').value;
             const type = document.getElementById('fleet-type').value;
@@ -3471,8 +3476,11 @@
         };
 
         window.deleteAircraft = async (id) => {
-            if (!auth?.currentUser || !db) return;
+            if (!db) { alert('Database not initialized.'); return; }
+            if (!auth?.currentUser) { alert('You must be logged in as an administrator to delete aircraft.'); return; }
             if (!confirm('Are you sure you want to delete this aircraft? This action cannot be undone.')) return;
+            
+            console.log('Deleting aircraft:', id);
             try {
                 await deleteDoc(doc(db, 'fleet', id));
                 window.loadFleetCMS();
