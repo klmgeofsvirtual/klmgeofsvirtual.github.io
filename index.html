@@ -984,11 +984,10 @@
                                 class="text-[10px] text-slate-400 uppercase">Co-Chairperson</span>
                         </li>
                         <li class="flex justify-between items-center bg-white/5 px-3 py-2 rounded">
-                            <span>Dutchjdjf</span> <span class="text-[10px] text-slate-500 uppercase">Staff Admin</span>
+                            <span>Dutchjdjf</span> <span class="text-[10px] text-slate-500 uppercase">Server Admin</span>
                         </li>
                         <li class="flex justify-between items-center bg-white/5 px-3 py-2 rounded">
-                            <span>midaviation</span> <span class="text-[10px] text-slate-500 uppercase">Staff
-                                Admin</span>
+                            <span>midaviation</span> <span class="text-[10px] text-slate-500 uppercase">Staff</span>
                         </li>
                     </ul>
                 </div>
@@ -1103,21 +1102,7 @@
 
         checkDiscordAuth();
 
-        const fleetData = [
-            { type: "Embraer 190", icao: "E190", role: "Cityhopper", desc: "Short-haul, high-frequency ops for training and local connectivity. Requires GeoFS Extra Vehicles addon.", status: "Active", count: 21, img: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Berlin_Brandenburg_Airport_KLM_Cityhopper_Embraer_E195-E2_PH-NXC_%28DSC02878%29.jpg", addon: "https://github.com/af267/GeoFS-Extra-Vehicles" },
-            { type: "Embraer 195-E2", icao: "E295", role: "Cityhopper", desc: "Modern regional efficiency. High frequency European connections. Requires GeoFS Extra Vehicles addon.", status: "Active", count: 25, img: "https://img.static-kl.com/transform/53cea398-7cff-4e3f-a7b1-496d4552fb10/", addon: "https://github.com/af267/GeoFS-Extra-Vehicles" },
-            { type: "Boeing 737-700 LTRP", icao: "B737", role: "Short Haul", desc: "Legacy workhorse receiving extended-life refurbishment.", status: "LTRP", count: 6, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/KLM_Boeing_737-7K2_PH-BGT_MUC_2015_01.jpg/1280px-KLM_Boeing_737-7K2_PH-BGT_MUC_2015_01.jpg" },
-            { type: "Boeing 737-800", icao: "B738", role: "Short Haul", desc: "Backbone of European operations. Gradual retirement scheduled.", status: "Phasing Out", count: 30, img: "https://upload.wikimedia.org/wikipedia/commons/1/18/KLM_Boeing_737-800_PH-BCD_%2826038861623%29.jpg" },
-            { type: "Airbus A320neo", icao: "A20N", role: "Short Haul", desc: "Next-gen European core. Maximum efficiency and realism.", status: "Active", count: 9, img: "https://image.parool.nl/211007987/width/2480/impressie-van-een-airbus-a320-neo-in-de-kleuren-van-klm" },
-            { type: "Airbus A321neo", icao: "A21N", role: "Short Haul", desc: "High-capacity European routes. Primary replacement for B737.", status: "Active", count: 21, img: "https://img.static-kl.com/transform/8806738a-a661-4934-a177-95adef39307d/" },
-            { type: "Airbus A350-900", icao: "A359", role: "Long Haul", desc: "Next-generation widebody. Ultra-efficient long-haul flagship with cutting-edge technology.", status: "Active", count: 28, img: "https://content.presspage.com/uploads/162/61e20533-7507-4ca2-98af-dc3959d4f981/1920_a350.jpg?10000" },
-            { type: "Boeing 777-300ER LTRP", icao: "B77W", role: "Long Haul", desc: "Reinforced and refurbished for reliable service.", status: "LTRP", count: 8, img: "https://www.aerotime.aero/images/klm_boeing_777-300er_orange_pride_livery.jpg" },
-            { type: "Boeing 787-9", icao: "B789", role: "Long Haul", desc: "The future of our long-haul operations. Elite flagship.", status: "Active", count: 13, img: "https://content.presspage.com/uploads/162/1920_25508202-10155250600310773-6357422191407278812-n.jpg" },
-            { type: "Boeing 787-10", icao: "B78X", role: "Long Haul", desc: "High-capacity Dreamliner for premium long-haul routes.", status: "Active", count: 14, img: "https://content.presspage.com/uploads/162/1920_paulridderhof30jun196473-465547.jpg?10000" },
-            { type: "Pilatus PC-24", icao: "PC24", role: "Executive", desc: "Private executive jet. Acquired from Lufthansa Airways for corporate and VIP operations.", status: "Active", count: 1, img: "https://www.luchtvaartnieuws.nl/sites/default/files/styles/artikel/public/website_633x300/sider-businessav/pilatus_pc24_c_pilatus_1280.jpg?itok=LABPzKcb" },
-            { type: "Embraer Phenom 100", icao: "E50P", role: "Executive", desc: "Entry-level jet with premium comfort. Ideal for short-range executive travel.", status: "Active", count: 2, img: "https://jetservicenl.com/files/aircraft/phenom-100.1.jpg" },
-            { type: "De Havilland Dash 8 Q400", icao: "DH8D", role: "Cityhopper", desc: "Short-haul regional turboprop. Requires GeoFS Extra Vehicles addon.", status: "Active", count: 12, img: "https://cdn.aerocontact.com/public/img/aviaexpo/produits/images/573/detail_q400_900x636.jpg", addon: "https://github.com/af267/GeoFS-Extra-Vehicles" },
-        ];
+
 
         const routeData = {
             "Europe": [{ city: "London Heathrow", code: "EGLL", out: "KL1006, KL1007, KL1008, KL1009, KL1010", in: "KL1001, KL1002, KL1003, KL1004, KL1005" }, { city: "Paris CDG", code: "LFPG", out: "KL1016, KL1017, KL1018, KL1019, KL1020", in: "KL1011, KL1012, KL1013, KL1014, KL1015" }, { city: "Berlin", code: "EDDB", out: "KL1026, KL1027, KL1028, KL1029, KL1030", in: "KL1021, KL1022, KL1023, KL1024, KL1025" }, { city: "Rome", code: "LIRF", out: "KL1036, KL1037, KL1038, KL1039, KL1040", in: "KL1031, KL1032, KL1033, KL1034, KL1035" }, { city: "Madrid", code: "LEMD", out: "KL1046, KL1047, KL1048, KL1049, KL1050", in: "KL1041, KL1042, KL1043, KL1044, KL1045" }, { city: "Vienna", code: "LOWW", out: "KL1056, KL1057, KL1058, KL1059, KL1060", in: "KL1051, KL1052, KL1053, KL1054, KL1055" }, { city: "Brussels", code: "EBBR", out: "KL1066, KL1067, KL1068, KL1069, KL1070", in: "KL1061, KL1062, KL1063, KL1064, KL1065" }, { city: "Zurich", code: "LSZH", out: "KL1076, KL1077, KL1078, KL1079, KL1080", in: "KL1071, KL1072, KL1073, KL1074, KL1075" }, { city: "Geneva", code: "LSGG", out: "KL1086, KL1087, KL1088, KL1089, KL1090", in: "KL1081, KL1082, KL1083, KL1084, KL1085" }, { city: "Stockholm", code: "ESSA", out: "KL1096, KL1097, KL1098, KL1099, KL1100", in: "KL1091, KL1092, KL1093, KL1094, KL1095" }, { city: "Copenhagen", code: "EKCH", out: "KL1106, KL1107, KL1108, KL1109, KL1110", in: "KL1101, KL1102, KL1103, KL1104, KL1105" }, { city: "Oslo", code: "ENGM", out: "KL1116, KL1117, KL1118, KL1119, KL1120", in: "KL1111, KL1112, KL1113, KL1114, KL1115" }, { city: "Helsinki", code: "EFHK", out: "KL1126, KL1127, KL1128, KL1129, KL1130", in: "KL1121, KL1122, KL1123, KL1124, KL1125" }, { city: "Riga", code: "EVRA", out: "KL1136, KL1137, KL1138, KL1139, KL1140", in: "KL1131, KL1132, KL1133, KL1134, KL1135" }, { city: "Tallinn", code: "EETN", out: "KL1146, KL1147, KL1148, KL1149, KL1150", in: "KL1141, KL1142, KL1143, KL1144, KL1145" }, { city: "Vilnius", code: "EYVI", out: "KL1156, KL1157, KL1158, KL1159, KL1160", in: "KL1151, KL1152, KL1153, KL1154, KL1155" }, { city: "Porto", code: "LPPR", out: "KL1166, KL1167, KL1168, KL1169, KL1170", in: "KL1161, KL1162, KL1163, KL1164, KL1165" }, { city: "Lisbon", code: "LPPT", out: "KL1176, KL1177, KL1178, KL1179, KL1180", in: "KL1171, KL1172, KL1173, KL1174, KL1175" }, { city: "Kraków", code: "EPKK", out: "KL1186, KL1187, KL1188, KL1189, KL1190", in: "KL1181, KL1182, KL1183, KL1184, KL1185" }, { city: "Warsaw", code: "EPWA", out: "KL1196, KL1197, KL1198, KL1199, KL1200", in: "KL1191, KL1192, KL1193, KL1194, KL1195" }, { city: "Prague", code: "LKPR", out: "KL1206, KL1207, KL1208, KL1209, KL1210", in: "KL1201, KL1202, KL1203, KL1204, KL1205" }, { city: "Budapest", code: "LHBP", out: "KL1216, KL1217, KL1218, KL1219, KL1220", in: "KL1211, KL1212, KL1213, KL1214, KL1215" }, { city: "Bucharest", code: "LROP", out: "KL1226, KL1227, KL1228, KL1229, KL1230", in: "KL1221, KL1222, KL1223, KL1224, KL1225" }, { city: "Marseille", code: "LFML", out: "KL1236, KL1237, KL1238, KL1239, KL1240", in: "KL1231, KL1232, KL1233, KL1234, KL1235" }, { city: "Nice", code: "LFMN", out: "KL1246, KL1247, KL1248, KL1249, KL1250", in: "KL1241, KL1242, KL1243, KL1244, KL1245" }, { city: "Athens", code: "LGAV", out: "KL1256, KL1257, KL1258, KL1259, KL1260", in: "KL1251, KL1252, KL1253, KL1254, KL1255" }],
@@ -1222,11 +1207,15 @@
                             <button onclick="window.adminNav('news')" id="admin-nav-news" class="admin-nav-btn flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all text-slate-400 hover:text-white hover:bg-white/5">
                                 <i data-lucide="newspaper" class="w-4 h-4 shrink-0 text-purple-400"></i> News CMS
                             </button>
+                            <button onclick="window.adminNav('fleet-cms')" id="admin-nav-fleet-cms" class="admin-nav-btn flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all text-slate-400 hover:text-white hover:bg-white/5">
+                                <i data-lucide="plane" class="w-4 h-4 shrink-0 text-sky-400"></i> Fleet CMS
+                            </button>
                             <div class="border-t border-white/5 my-2"></div>
                             <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest px-3 pb-1">Account</div>
                             <button onclick="window.adminNav('settings')" id="admin-nav-settings" class="admin-nav-btn flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all text-slate-400 hover:text-white hover:bg-white/5">
-                                <i data-lucide="key" class="w-4 h-4 shrink-0 text-slate-500"></i> Password
+                                <i data-lucide="settings" class="w-4 h-4 shrink-0 text-slate-500"></i> Settings
                             </button>
+
                         </div>
 
                         <!-- Main content area -->
@@ -1239,8 +1228,6 @@
                                         <i data-lucide="message-circle" class="w-4 h-4 text-amber-500"></i>
                                         <span class="font-bold text-white text-xs uppercase tracking-widest">Admin Chat</span>
                                         <div class="ml-auto flex items-center gap-2">
-                                            <span id="chat-name-badge" class="text-[10px] font-mono text-slate-500"></span>
-                                            <button id="chat-change-name-btn" onclick="window.showChangeName()" class="hidden text-[10px] text-slate-500 hover:text-amber-400 px-2 py-1 rounded bg-white/5 font-mono uppercase tracking-widest transition-colors">rename</button>
                                             <button id="chat-clear-btn" onclick="window.clearAdminChat()" class="hidden text-[10px] text-red-500/60 hover:text-red-400 px-2 py-1 rounded bg-red-500/5 font-mono uppercase tracking-widest transition-colors flex items-center gap-1">
                                                 <i data-lucide="trash-2" class="w-3 h-3"></i> Clear
                                             </button>
@@ -1249,12 +1236,8 @@
                                     <div id="admin-chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm">
                                         <div class="text-center text-slate-600 text-xs pt-8">Loading messages...</div>
                                     </div>
-                                    <div id="chat-name-prompt" class="hidden border-t border-white/10 p-4 shrink-0">
-                                        <p class="text-xs text-slate-400 mb-3">Set a display name to begin chatting.</p>
-                                        <div class="flex gap-2">
-                                            <input type="text" id="chat-name-input" maxlength="20" placeholder="Your display name" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 font-mono">
-                                            <button onclick="window.setAdminDisplayName()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest transition-all">Save</button>
-                                        </div>
+                                    <div id="chat-name-prompt" class="hidden border-t border-white/10 p-4 shrink-0 text-center">
+                                        <p class="text-xs text-slate-400">Please set a display name in the <strong>Settings</strong> tab to begin chatting.</p>
                                     </div>
                                     <form id="chat-input-area" onsubmit="window.sendAdminMessage(event)" class="hidden border-t border-white/10 p-4 flex gap-2 shrink-0">
                                         <input type="text" id="chat-msg-input" maxlength="300" placeholder="Send a message..." autocomplete="off" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
@@ -1373,8 +1356,9 @@
                                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                                     <!-- Add News Form -->
                                     <div class="glass-panel rounded-2xl border border-white/10 p-5 lg:col-span-1 h-fit">
-                                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="w-3.5 h-3.5 text-purple-400"></i> Publish Article</div>
+                                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2" id="news-form-title"><i data-lucide="plus-circle" class="w-3.5 h-3.5 text-purple-400"></i> Publish Article</div>
                                         <form onsubmit="window.publishNews(event)" class="space-y-4">
+                                            <input type="hidden" id="news-id" value="">
                                             <div>
                                                 <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Title</label>
                                                 <input type="text" id="news-title" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-purple-500 transition-all font-mono" placeholder="Article Title">
@@ -1424,9 +1408,104 @@
                                 </div>
                             </div>
 
+                            <!-- ===== FLEET CMS PANEL ===== -->
+                            <div id="admin-panel-fleet-cms" class="admin-panel" style="display:none">
+                                <div class="mb-6">
+                                    <h2 class="text-xl font-black text-white">Fleet CMS</h2>
+                                    <p class="text-slate-500 text-[10px] mt-0.5 font-mono">Manage aircraft operations and fleet data</p>
+                                </div>
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                                    <!-- Add/Edit Fleet Form -->
+                                    <div class="glass-panel rounded-2xl border border-white/10 p-5 lg:col-span-1 h-fit">
+                                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="plane" class="w-3.5 h-3.5 text-sky-400"></i> <span id="fleet-form-title">Add Aircraft</span></div>
+                                        <form onsubmit="window.saveAircraft(event)" class="space-y-4">
+                                            <input type="hidden" id="fleet-id">
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Type (e.g. Boeing 737-800)</label>
+                                                <input type="text" id="fleet-type" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono" placeholder="Type">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-3">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">ICAO</label>
+                                                    <input type="text" id="fleet-icao" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono" placeholder="B738">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Count</label>
+                                                    <input type="number" id="fleet-count" required min="1" class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-3">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Role</label>
+                                                    <select id="fleet-role" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono appearance-none">
+                                                        <option value="Cityhopper">Cityhopper</option>
+                                                        <option value="Short Haul">Short Haul</option>
+                                                        <option value="Long Haul">Long Haul</option>
+                                                        <option value="Executive">Executive</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Status</label>
+                                                    <select id="fleet-status" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono appearance-none">
+                                                        <option value="Active">Active</option>
+                                                        <option value="LTRP">LTRP</option>
+                                                        <option value="Phasing Out">Phasing Out</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Image URL</label>
+                                                <input type="url" id="fleet-img" required class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono" placeholder="https://...">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Description</label>
+                                                <textarea id="fleet-desc" required rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl py-2.5 px-4 text-sm text-white focus:outline-none focus:border-sky-500 transition-all font-mono resize-none" placeholder="Description..."></textarea>
+                                            </div>
+                                            <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-black uppercase tracking-widest py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(14,165,233,0.25)] flex justify-center items-center gap-2 text-xs mt-2">
+                                                <i data-lucide="save" class="w-4 h-4"></i> Save
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <!-- Fleet List -->
+                                    <div class="glass-panel rounded-2xl border border-white/10 overflow-hidden lg:col-span-2 flex flex-col" style="max-height: calc(100vh - 200px);">
+                                        <div class="px-5 py-3.5 border-b border-white/5 flex items-center justify-between shrink-0">
+                                            <span class="text-xs font-bold text-white uppercase tracking-widest">Active Fleet Database</span>
+                                        </div>
+                                        <div class="overflow-y-auto flex-1">
+                                            <table class="w-full text-left border-collapse min-w-[500px]">
+                                                <thead>
+                                                    <tr class="text-[10px] uppercase tracking-wider font-mono border-b border-white/5 text-slate-500 sticky top-0" style="background:rgba(15,23,42,0.95)">
+                                                        <th class="px-4 py-2.5">Aircraft Type</th>
+                                                        <th class="px-4 py-2.5">Role</th>
+                                                        <th class="px-4 py-2.5">Status</th>
+                                                        <th class="px-4 py-2.5">Qty</th>
+                                                        <th class="px-4 py-2.5 text-right">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="admin-fleet-table"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- ===== SETTINGS PANEL ===== -->
                             <div id="admin-panel-settings" class="admin-panel max-w-md" style="display:none">
                                 <h2 class="text-xl font-black text-white mb-5">Account Settings</h2>
+                                
+                                <div class="glass-panel rounded-2xl border border-white/10 p-6 mb-4">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i data-lucide="user" class="w-4 h-4 text-sky-400"></i>
+                                        <span class="font-bold text-white text-xs uppercase tracking-widest">Display Name</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mb-3">Set your display name for the admin chat.</p>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="chat-name-input" maxlength="20" placeholder="Your display name" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 font-mono">
+                                        <button onclick="window.setAdminDisplayName()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest transition-all">Save</button>
+                                    </div>
+                                    <div class="mt-3 text-[10px] font-mono text-slate-500">Current Name: <span id="chat-name-badge" class="text-white">Not Set</span></div>
+                                </div>
+
                                 <div class="glass-panel rounded-2xl border border-white/10 p-6 mb-4">
                                     <div class="flex items-center gap-3 mb-5">
                                         <i data-lucide="key" class="w-4 h-4 text-amber-500"></i>
@@ -1447,9 +1526,10 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="glass-panel rounded-2xl border border-white/10 p-6">
+
+                                <div class="glass-panel rounded-2xl border border-white/10 p-6 mb-4">
                                     <div class="flex items-center gap-3 mb-4">
-                                        <i data-lucide="user-check" class="w-4 h-4 text-amber-500"></i>
+                                        <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
                                         <span class="font-bold text-white text-xs uppercase tracking-widest">Session</span>
                                     </div>
                                     <div id="portal-session-info" class="text-xs font-mono text-slate-400 space-y-2"><div>Loading...</div></div>
@@ -1691,35 +1771,11 @@
                             <p class="text-lg text-slate-400 max-w-2xl mx-auto font-light">Strategic deployment of modern, efficient aircraft designed for rigorous scheduling.</p>
                         </div>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            ${fleetData.map((plane, i) => {
-                let statusColor = plane.status === 'Active' ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' :
-                    plane.status === 'Phasing Out' ? 'text-amber-400 border-amber-500/30 bg-amber-500/10' :
-                        plane.status === 'LTRP' ? 'text-purple-400 border-purple-500/30 bg-purple-500/10' :
-                            'text-indigo-400 border-indigo-500/30 bg-indigo-500/10';
-                return `
-                                <div class="glass-panel rounded-2xl overflow-hidden hover-lift group animate-slide-up" style="animation-delay: ${i * 50}ms;">
-                                    <div class="h-48 overflow-hidden relative bg-slate-900 border-b border-white/5">
-                                        <img src="${plane.img}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
-                                        <div class="absolute top-4 right-4 ${statusColor} border px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-widest backdrop-blur-md shadow-sm">
-                                            ${plane.status}
-                                        </div>
-                                    </div>
-                                    <div class="p-6 relative z-20">
-                                        <div class="flex justify-between items-baseline mb-2">
-                                            <h3 class="text-lg font-bold text-white tracking-tight">${plane.type}</h3>
-                                            <span class="text-slate-500 text-xs font-mono font-bold">QTY: ${plane.count}</span>
-                                        </div>
-                                        <div class="text-klm text-[10px] font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
-                                            <i data-lucide="plane" class="w-3 h-3"></i> ${plane.role}
-                                        </div>
-                                        <div class="text-[10px] text-slate-400 font-mono mb-4 bg-white/5 border border-white/5 inline-block px-2 py-1 rounded">ICAO: ${plane.icao}</div>
-                                        <p class="text-slate-400 text-sm leading-relaxed font-light">${plane.desc}</p>
-                                    </div>
-                                </div>
-                                `
-            }).join('')}
+                        <div id="public-fleet-feed" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="col-span-full py-12 text-center text-slate-500 font-mono text-xs">
+                                <i data-lucide="loader" class="w-6 h-6 animate-spin mx-auto text-slate-500 mb-4"></i>
+                                Loading fleet database...
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2321,6 +2377,7 @@
             if (pageName === 'condolences') { setTimeout(initCondolences, 100); }
             if (pageName === 'adminPortal') { setTimeout(initAdminPortal, 100); }
             if (pageName === 'news') { setTimeout(window.initNewsPage, 100); }
+            if (pageName === 'fleet') { setTimeout(window.initFleetPage, 100); }
 
             lucide.createIcons();
             window.scrollTo(0, 0);
@@ -2347,7 +2404,24 @@
 
             const regions = Object.keys(routeData);
             if (regionSelect) regionSelect.innerHTML = regions.map(r => `<option value="${r}">${r}</option>`).join('');
-            if (acSelect) acSelect.innerHTML = fleetData.filter(f => f.status === 'Active' || f.status === 'Phasing Out' || f.status === 'LTRP').map(f => `<option value="${f.type}">${f.type}</option>`).join('');
+            if (acSelect) {
+                acSelect.innerHTML = '<option value="">Loading...</option>';
+                if (db) {
+                    getDocs(query(collection(db, 'fleet'), orderBy('type', 'asc'))).then(snap => {
+                        let opts = '';
+                        snap.forEach(d => {
+                            const f = d.data();
+                            if (f.status === 'Active' || f.status === 'Phasing Out' || f.status === 'LTRP') {
+                                opts += `<option value="${f.type}" data-icao="${f.icao}">${f.type}</option>`;
+                            }
+                        });
+                        acSelect.innerHTML = opts || '<option value="">No aircraft available</option>';
+                    }).catch(e => {
+                        console.error(e);
+                        acSelect.innerHTML = '<option value="">Error loading fleet</option>';
+                    });
+                }
+            }
 
             if (loginSection) {
                 if (discordUser) {
@@ -2527,7 +2601,13 @@
                 departure = document.getElementById('disp-dep').textContent;
             }
 
-            const selectedFleet = fleetData.find(f => f.type === document.getElementById('aircraft-select').value);
+            const acSelectElem = document.getElementById('aircraft-select');
+            const acOption = acSelectElem.options[acSelectElem.selectedIndex];
+            if (!acOption || !acOption.value) {
+                alert("Please select an aircraft.");
+                btn.innerHTML = originalText; btn.disabled = false; return;
+            }
+            const selectedFleet = { type: acOption.value, icao: acOption.getAttribute('data-icao') };
             const timeVal = document.getElementById('dep-time').value;
             const today = new Date();
             const [hours, minutes] = timeVal.split(':');
@@ -2596,40 +2676,102 @@
         // --- MAP LOGIC ---
         let mapInstance = null, flightLinesLayer = null;
         const routeManifest = [
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "EGLL", "destinationCoords": [-0.4543, 51.4700] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LFPG", "destinationCoords": [2.5479, 49.0097] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "EDDB", "destinationCoords": [13.5033, 52.3667] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LIRF", "destinationCoords": [12.2389, 41.8003] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LEMD", "destinationCoords": [-3.5679, 40.4936] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LOWW", "destinationCoords": [16.5697, 48.1103] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "ESSA", "destinationCoords": [17.9186, 59.6519] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "ENGM", "destinationCoords": [11.1004, 60.1939] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "EKCH", "destinationCoords": [12.6560, 55.6180] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LGAV", "destinationCoords": [23.9445, 37.9364] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "KJFK", "destinationCoords": [-73.7781, 40.6413] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "KATL", "destinationCoords": [-84.4277, 33.6407] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "KLAX", "destinationCoords": [-118.4085, 33.9416] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "KORD", "destinationCoords": [-87.9048, 41.9742] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "CYYZ", "destinationCoords": [-79.6248, 43.6777] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "MMMX", "destinationCoords": [-99.0721, 19.4361] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "SBGR", "destinationCoords": [-46.4731, -23.4356] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "SAEZ", "destinationCoords": [-58.5358, -34.8222] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "SKBO", "destinationCoords": [-74.1469, 4.7016] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "SPJC", "destinationCoords": [-77.1143, -12.0219] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "FAOR", "destinationCoords": [28.2411, -26.1367] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "HKJK", "destinationCoords": [36.9275, -1.3192] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "FACT", "destinationCoords": [18.6017, -33.9715] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "DGAA", "destinationCoords": [-0.1667, 5.6052] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "OMDB", "destinationCoords": [55.3644, 25.2532] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "OTHH", "destinationCoords": [51.6080, 25.2730] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "LLBG", "destinationCoords": [34.8867, 32.0114] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "RJAA", "destinationCoords": [140.3929, 35.7719] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "WSSS", "destinationCoords": [103.9940, 1.3644] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "VIDP", "destinationCoords": [77.1000, 28.5562] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "ZBAA", "destinationCoords": [116.5845, 40.0799] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "VTBS", "destinationCoords": [100.7501, 13.6811] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "RKSI", "destinationCoords": [126.4407, 37.4602] },
-            { "origin": "EHAM", "originCoords": [4.7639, 52.3091], "destination": "WIII", "destinationCoords": [106.6559, -6.1256] }
+            // Europe
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EGLL", "destinationCoords": [-0.454, 51.470] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LFPG", "destinationCoords": [2.547, 49.009] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EDDB", "destinationCoords": [13.503, 52.366] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LIRF", "destinationCoords": [12.238, 41.800] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LEMD", "destinationCoords": [-3.566, 40.493] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LOWW", "destinationCoords": [16.569, 48.110] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EBBR", "destinationCoords": [4.484, 50.901] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LSZH", "destinationCoords": [8.548, 47.458] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LSGG", "destinationCoords": [6.109, 46.237] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "ESSA", "destinationCoords": [17.918, 59.651] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EKCH", "destinationCoords": [12.656, 55.617] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "ENGM", "destinationCoords": [11.100, 60.193] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EFHK", "destinationCoords": [24.963, 60.317] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EVRA", "destinationCoords": [23.971, 56.923] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EETN", "destinationCoords": [24.832, 59.413] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EYVI", "destinationCoords": [25.285, 54.634] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LPPR", "destinationCoords": [-8.678, 41.242] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LPPT", "destinationCoords": [-9.134, 38.774] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EPKK", "destinationCoords": [19.784, 50.077] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EPWA", "destinationCoords": [20.967, 52.165] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LKPR", "destinationCoords": [14.260, 50.100] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LHBP", "destinationCoords": [19.262, 47.436] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LROP", "destinationCoords": [26.084, 44.571] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LFML", "destinationCoords": [5.214, 43.436] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LFMN", "destinationCoords": [7.215, 43.665] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LGAV", "destinationCoords": [23.944, 37.936] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "ENBR", "destinationCoords": [5.218, 60.293] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EICK", "destinationCoords": [-8.491, 51.841] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LOWI", "destinationCoords": [11.343, 47.260] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "EGKK", "destinationCoords": [-0.190, 51.148] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LFPO", "destinationCoords": [2.365, 48.726] },
+            
+            // North America
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KJFK", "destinationCoords": [-73.778, 40.641] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KATL", "destinationCoords": [-84.427, 33.640] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KLAX", "destinationCoords": [-118.408, 33.941] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KSFO", "destinationCoords": [-122.374, 37.619] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KORD", "destinationCoords": [-87.907, 41.974] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KIAD", "destinationCoords": [-77.455, 38.944] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KBOS", "destinationCoords": [-71.005, 42.364] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "KIAH", "destinationCoords": [-95.336, 29.990] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "CYYZ", "destinationCoords": [-79.624, 43.677] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "CYUL", "destinationCoords": [-73.740, 45.470] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "CYYC", "destinationCoords": [-114.020, 51.113] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "CYVR", "destinationCoords": [-123.181, 49.196] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "MMMX", "destinationCoords": [-99.072, 19.436] },
+
+            // South America & Caribbean
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SBGR", "destinationCoords": [-46.473, -23.435] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SBGL", "destinationCoords": [-43.250, -22.810] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SAEZ", "destinationCoords": [-58.535, -34.822] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SPJC", "destinationCoords": [-77.114, -12.021] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SKBO", "destinationCoords": [-74.146, 4.701] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SEQM", "destinationCoords": [-78.357, -0.129] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SEGU", "destinationCoords": [-79.883, -2.157] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "SMJP", "destinationCoords": [-55.187, 5.452] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "TNCA", "destinationCoords": [-70.015, 12.501] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "TNCC", "destinationCoords": [-68.959, 12.188] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "TNCB", "destinationCoords": [-68.268, 12.130] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "TNCM", "destinationCoords": [-63.109, 18.040] },
+
+            // Africa
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "HKJK", "destinationCoords": [36.927, -1.319] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "HTDA", "destinationCoords": [39.202, -6.878] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "FAOR", "destinationCoords": [28.246, -26.139] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "FACT", "destinationCoords": [18.601, -33.971] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "DGAA", "destinationCoords": [-0.166, 5.605] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "DNMM", "destinationCoords": [3.321, 6.577] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "HRYR", "destinationCoords": [30.139, -1.968] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "HUEN", "destinationCoords": [32.443, 0.042] },
+
+            // Asia & Middle East
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "VIDP", "destinationCoords": [77.103, 28.566] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "VABB", "destinationCoords": [72.867, 19.089] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "VOBL", "destinationCoords": [77.706, 13.198] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "ZBAA", "destinationCoords": [116.597, 40.079] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "ZSPD", "destinationCoords": [121.805, 31.144] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "VHHH", "destinationCoords": [113.914, 22.308] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "RJAA", "destinationCoords": [140.392, 35.772] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "RJBB", "destinationCoords": [135.244, 34.434] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "RKSI", "destinationCoords": [126.440, 37.460] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "VTBS", "destinationCoords": [100.750, 13.690] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "WSSS", "destinationCoords": [103.991, 1.364] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "WMKK", "destinationCoords": [101.709, 2.745] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "WIII", "destinationCoords": [106.655, -6.125] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "RPLL", "destinationCoords": [121.019, 14.508] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "RCTP", "destinationCoords": [121.234, 25.079] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "WADD", "destinationCoords": [115.167, -8.748] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "OMDB", "destinationCoords": [55.364, 25.253] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "OMAA", "destinationCoords": [54.651, 24.432] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "OKBK", "destinationCoords": [47.969, 29.226] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "OTHH", "destinationCoords": [51.608, 25.273] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "LLBG", "destinationCoords": [34.885, 32.009] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "OERK", "destinationCoords": [46.698, 24.957] },
+            { "origin": "EHAM", "originCoords": [4.764, 52.308], "destination": "HECA", "destinationCoords": [31.405, 30.122] }
         ];
 
         function initFleetMap() {
@@ -2847,6 +2989,7 @@
             }
             if (panel === 'flights') loadAdminFlights();
             if (panel === 'news') window.loadAdminNews();
+            if (panel === 'fleet-cms') window.loadFleetCMS();
             if (panel === 'profits') {
                 // Auto-populate dates: first of current month → today
                 const today = new Date();
@@ -3112,6 +3255,7 @@
         window.publishNews = async (e) => {
             e.preventDefault();
             if (!auth?.currentUser || !db) return;
+            const id = document.getElementById('news-id').value;
             const title = document.getElementById('news-title').value;
             const tag = document.getElementById('news-tag').value;
             const content = document.getElementById('news-content').value;
@@ -3122,23 +3266,28 @@
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Publishing...';
+            submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Saving...';
             submitBtn.disabled = true;
 
+            const data = { title, tag, content };
+
             try {
-                await addDoc(collection(db, 'news'), {
-                    title: title,
-                    tag: tag,
-                    content: content,
-                    date: dateStr,
-                    createdAt: serverTimestamp()
-                });
+                if (id) {
+                    await updateDoc(doc(db, 'news', id), data);
+                    alert('Article updated successfully!');
+                } else {
+                    data.date = dateStr;
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'news'), data);
+                    alert('Article published successfully!');
+                }
                 e.target.reset();
-                alert('Article published successfully!');
+                document.getElementById('news-id').value = '';
+                document.getElementById('news-form-title').innerHTML = '<i data-lucide="plus-circle" class="w-3.5 h-3.5 text-purple-400"></i> Publish Article';
                 window.loadAdminNews();
             } catch (err) {
                 console.error(err);
-                alert('Failed to publish: ' + err.message);
+                alert('Failed to save article: ' + err.message);
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
@@ -3169,7 +3318,10 @@
                                 <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm border ${colorClass}">${d.tag || 'UNKNOWN'}</span>
                             </td>
                             <td class="px-4 py-3 text-sm font-bold text-slate-200 w-full">${d.title || 'Untitled'}</td>
-                            <td class="px-4 py-3 text-right whitespace-nowrap">
+                            <td class="px-4 py-3 text-right whitespace-nowrap flex justify-end gap-2">
+                                <button onclick='window.editAdminNews(${JSON.stringify({id: docSnap.id, ...d}).replace(/'/g, "&#39;")})' class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-white transition flex items-center justify-center border border-sky-500/20 hover:border-sky-500 opacity-50 group-hover:opacity-100" title="Edit Article">
+                                    <i data-lucide="edit-2" class="w-4 h-4"></i>
+                                </button>
                                 <button onclick="window.deleteAdminNews('${docSnap.id}')" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition flex items-center justify-center border border-red-500/20 hover:border-red-500 opacity-50 group-hover:opacity-100" title="Delete Article">
                                     <i data-lucide="trash-2" class="w-4 h-4"></i>
                                 </button>
@@ -3185,18 +3337,186 @@
             }
         };
 
-        window.deleteAdminNews = async (id) => {
+        window.editAdminNews = (news) => {
+            document.getElementById('news-id').value = news.id;
+            document.getElementById('news-title').value = news.title;
+            document.getElementById('news-tag').value = news.tag;
+            document.getElementById('news-content').value = news.content;
+            document.getElementById('news-form-title').innerHTML = '<i data-lucide="edit-2" class="w-3.5 h-3.5 text-sky-400"></i> Edit Article';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // --- FLEET CMS ---
+        window.saveAircraft = async (e) => {
+            e.preventDefault();
             if (!auth?.currentUser || !db) return;
-            if (!confirm('Are you sure you want to delete this article? This action cannot be undone.')) return;
+            
+            const id = document.getElementById('fleet-id').value;
+            const type = document.getElementById('fleet-type').value;
+            const icao = document.getElementById('fleet-icao').value;
+            const role = document.getElementById('fleet-role').value;
+            const status = document.getElementById('fleet-status').value;
+            const count = parseInt(document.getElementById('fleet-count').value, 10);
+            const img = document.getElementById('fleet-img').value;
+            const desc = document.getElementById('fleet-desc').value;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Saving...';
+            submitBtn.disabled = true;
+
+            const data = { type, icao, role, status, count, img, desc };
+
             try {
-                await deleteDoc(doc(db, 'news', id));
-                window.loadAdminNews();
+                if (id) {
+                    await updateDoc(doc(db, 'fleet', id), data);
+                    alert('Aircraft updated successfully!');
+                } else {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'fleet'), data);
+                    alert('Aircraft added successfully!');
+                }
+                e.target.reset();
+                document.getElementById('fleet-id').value = '';
+                document.getElementById('fleet-form-title').textContent = 'Add Aircraft';
+                window.loadFleetCMS();
+            } catch (err) {
+                console.error(err);
+                alert('Failed to save aircraft: ' + err.message);
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                if (window.lucide) lucide.createIcons();
+            }
+        };
+
+        window.loadFleetCMS = async () => {
+            const table = document.getElementById('admin-fleet-table');
+            if (!table || !db) return;
+            table.innerHTML = '<tr><td colspan="5" class="py-10 text-center"><i data-lucide="loader" class="w-5 h-5 animate-spin mx-auto text-slate-500"></i></td></tr>';
+            if (window.lucide) lucide.createIcons();
+
+            try {
+                const snap = await getDocs(query(collection(db, 'fleet'), orderBy('type', 'asc')));
+                if (snap.empty) {
+                    table.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-slate-500 text-xs font-mono">No aircraft in fleet database.</td></tr>';
+                    return;
+                }
+                const html = [];
+                snap.forEach(docSnap => {
+                    const f = docSnap.data();
+                    let statusColor = f.status === 'Active' ? 'text-emerald-400 border-emerald-500/30' :
+                        f.status === 'Phasing Out' ? 'text-amber-400 border-amber-500/30' :
+                        f.status === 'LTRP' ? 'text-purple-400 border-purple-500/30' :
+                        'text-indigo-400 border-indigo-500/30';
+                        
+                    html.push(`
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                            <td class="px-4 py-3 text-sm font-bold text-slate-200 w-full">${f.type || 'Unknown'} <span class="text-[10px] text-slate-500 font-mono font-normal ml-2">ICAO: ${f.icao || '---'}</span></td>
+                            <td class="px-4 py-3 text-xs text-sky-400 whitespace-nowrap"><i data-lucide="plane" class="w-3 h-3 inline mr-1"></i>${f.role || '---'}</td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm border ${statusColor}">${f.status || 'UNKNOWN'}</span>
+                            </td>
+                            <td class="px-4 py-3 text-xs font-mono text-slate-300">${f.count || 0}</td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap flex justify-end gap-2">
+                                <button onclick='window.editAircraft(${JSON.stringify({id: docSnap.id, ...f}).replace(/'/g, "&#39;")})' class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-white transition flex items-center justify-center border border-sky-500/20 hover:border-sky-500 opacity-50 group-hover:opacity-100" title="Edit Aircraft">
+                                    <i data-lucide="edit-2" class="w-4 h-4"></i>
+                                </button>
+                                <button onclick="window.deleteAircraft('${docSnap.id}')" class="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition flex items-center justify-center border border-red-500/20 hover:border-red-500 opacity-50 group-hover:opacity-100" title="Delete Aircraft">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+                table.innerHTML = html.join('');
+                if (window.lucide) lucide.createIcons();
+            } catch (err) {
+                console.error(err);
+                table.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-red-400 text-xs font-mono">Failed to load fleet</td></tr>';
+            }
+        };
+
+        window.editAircraft = (f) => {
+            document.getElementById('fleet-id').value = f.id;
+            document.getElementById('fleet-type').value = f.type;
+            document.getElementById('fleet-icao').value = f.icao;
+            document.getElementById('fleet-role').value = f.role;
+            document.getElementById('fleet-status').value = f.status;
+            document.getElementById('fleet-count').value = f.count;
+            document.getElementById('fleet-img').value = f.img;
+            document.getElementById('fleet-desc').value = f.desc;
+            document.getElementById('fleet-form-title').textContent = 'Edit Aircraft';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.deleteAircraft = async (id) => {
+            if (!auth?.currentUser || !db) return;
+            if (!confirm('Are you sure you want to delete this aircraft? This action cannot be undone.')) return;
+            try {
+                await deleteDoc(doc(db, 'fleet', id));
+                window.loadFleetCMS();
             } catch (err) {
                 console.error(err);
                 alert('Failed to delete: ' + err.message);
             }
         };
 
+
+
+        // --- PUBLIC FLEET FEED ---
+        window.initFleetPage = async () => {
+            const feed = document.getElementById('public-fleet-feed');
+            if (!feed || !db) return;
+
+            try {
+                const snap = await getDocs(query(collection(db, 'fleet'), orderBy('type', 'asc')));
+                if (snap.empty) {
+                    feed.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500 font-mono text-xs">No active fleet data available.</div>';
+                    return;
+                }
+
+                const html = [];
+                let i = 0;
+                snap.forEach(docSnap => {
+                    const plane = docSnap.data();
+                    let statusColor = plane.status === 'Active' ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' :
+                        plane.status === 'Phasing Out' ? 'text-amber-400 border-amber-500/30 bg-amber-500/10' :
+                        plane.status === 'LTRP' ? 'text-purple-400 border-purple-500/30 bg-purple-500/10' :
+                        'text-indigo-400 border-indigo-500/30 bg-indigo-500/10';
+                    const delay = Math.min(i, 8) * 50;
+                    
+                    html.push(`
+                        <div class="glass-panel rounded-2xl overflow-hidden hover-lift group animate-slide-up" style="animation-delay: ${delay}ms;">
+                            <div class="h-48 overflow-hidden relative bg-slate-900 border-b border-white/5">
+                                <img src="${plane.img || ''}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
+                                <div class="absolute top-4 right-4 ${statusColor} border px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-widest backdrop-blur-md shadow-sm">
+                                    ${plane.status || 'Unknown'}
+                                </div>
+                            </div>
+                            <div class="p-6 relative z-20">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h3 class="text-lg font-bold text-white tracking-tight">${plane.type || 'Unknown Type'}</h3>
+                                    <span class="text-slate-500 text-xs font-mono font-bold">QTY: ${plane.count || 0}</span>
+                                </div>
+                                <div class="text-klm text-[10px] font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <i data-lucide="plane" class="w-3 h-3"></i> ${plane.role || 'Unknown'}
+                                </div>
+                                <div class="text-[10px] text-slate-400 font-mono mb-4 bg-white/5 border border-white/5 inline-block px-2 py-1 rounded">ICAO: ${plane.icao || '---'}</div>
+                                <p class="text-slate-400 text-sm leading-relaxed font-light">${plane.desc || ''}</p>
+                            </div>
+                        </div>
+                    `);
+                    i++;
+                });
+                feed.innerHTML = html.join('');
+                if (window.lucide) lucide.createIcons();
+            } catch (err) {
+                console.error(err);
+                feed.innerHTML = '<div class="col-span-full py-12 text-center text-red-400 font-mono text-xs">Failed to load fleet data.</div>';
+            }
+        };
 
         // --- PUBLIC NEWS FEED ---
         window.initNewsPage = async () => {
@@ -3224,9 +3544,7 @@
                                 <span class="text-slate-500">${news.date || '—'}</span>
                             </div>
                             <h2 class="text-xl font-bold text-slate-100 mb-3 leading-snug">${news.title || 'Untitled'}</h2>
-                            <div class="text-slate-400 leading-relaxed text-sm font-light">
-                                ${news.content || ''}
-                            </div>
+                            <div class="text-slate-400 leading-relaxed text-sm font-light whitespace-pre-wrap">${news.content || ''}</div>
                         </article>
                     `);
                     i++;
